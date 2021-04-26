@@ -9,7 +9,7 @@ namespace RedisProject.Data
 {
     public interface ISqlCommands
     {
-        Task<IEnumerable<Sample1000Model>> AllData();
+        Task<List<Sample1000Model>> AllData();
     }
 
     public class SqlCommands : ISqlCommands
@@ -20,11 +20,12 @@ namespace RedisProject.Data
         {
             _config = config;
         }
-        public async Task<IEnumerable<Sample1000Model>> AllData()
+        public async Task<List<Sample1000Model>> AllData()
         {
             using (var conn = new SqliteConnection(_config.GetConnectionString("Default")))
             {
-                return await conn.QueryAsync<Sample1000Model>("Select id,name,Dob from SampleData;");
+                var result= await conn.QueryAsync<Sample1000Model>("Select id,name,Dob from SampleData;");
+                return result.ToList();
             }
         }
     }

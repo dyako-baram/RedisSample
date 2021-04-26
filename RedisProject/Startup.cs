@@ -27,6 +27,9 @@ namespace RedisProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddStackExchangeRedisCache(option=>{
+                option.Configuration="localhost:6379";
+            });
             services.AddTransient<ISqlCommands,SqlCommands>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
