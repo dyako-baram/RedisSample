@@ -29,6 +29,7 @@ namespace RedisProject
         {
             services.AddStackExchangeRedisCache(option=>{
                 option.Configuration="localhost:6379";
+                option.InstanceName="RedisProject_";
             });
             services.AddTransient<ISqlCommands,SqlCommands>();
             services.AddControllers();
